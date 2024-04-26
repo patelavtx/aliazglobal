@@ -1,5 +1,5 @@
 
-# Step1  ALI Global 
+# Step1  ALI Transit Global 
 module "mc-transit-ali" {
   source              = "terraform-aviatrix-modules/mc-transit/aviatrix"
   version             = "2.5.3"
@@ -21,7 +21,7 @@ module "mc-transit-ali" {
 
 
 
-# Step2 AZ Global Transit
+# Step2 AZ Transit Global
 module "mc-transit" {
   source              = "terraform-aviatrix-modules/mc-transit/aviatrix"
   version             = "2.5.3"
@@ -37,11 +37,11 @@ module "mc-transit" {
   gw_name             = var.az_txgateway_name
   ha_gw               = var.az_txha_gw
   #enable_advertise_transit_cidr = "true"
-  tags = var.tags
+  # tags = var.tags                        # Not supported in ALI
 }
 
 
-#  Az Transit to ALI Transit peering
+#  Az Transit Global to ALI Transit Global peering
 resource "aviatrix_transit_gateway_peering" "gbl_az_ali_peering" {
   transit_gateway_name1 = module.mc-transit.transit_gateway.gw_name
   transit_gateway_name2 = module.mc-transit-ali.transit_gateway.gw_name
@@ -63,12 +63,12 @@ resource "aviatrix_transit_gateway_peering" "gbl_az_ali_peering" {
 
 
 
-
+# Az Spoke Global
 module "spoke_azure_1" {
   source     = "terraform-aviatrix-modules/mc-spoke/aviatrix"
   version    = "1.6.5"
   cloud      = "Azure" # added for new mod
-  transit_gw = var.az_txgateway_name
+  transit_gw = module.mc-transit.transit_gateway.gw_name
   attached   = var.attached
   cidr       = var.az_spkcidr
   region     = var.az_spkregion
