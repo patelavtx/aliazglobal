@@ -85,9 +85,29 @@ variable "ali_cn_vpcname" {
     description = ""
 }
 
+variable "ali_cn_asn" {
+  description = "Set internal BGP ASN"
+  type        = string
+  default = "65004"
+}
+
+variable "ali_global_asn" {
+  description = "Set internal BGP ASN"
+  type        = string
+  default = "65040"
+}
+
+
+
 locals {
   peer_conn = "${var.ali_global_region}-${var.ali_cn_region}"
 }
+
+
+
+
+
+
 
 # Step2 AZ Global Transit
 variable "az_account" {
@@ -187,3 +207,21 @@ variable "nat_attached" {
 variable "attached" {
   default     = "true"
 }
+
+variable "apipa1" {
+  description = "Provide CSR vNet address space"
+  default = "169.254.31.201/30"
+}
+
+
+variable "apipa2" {
+  description = "Provide CSR vNet address space"
+  default = "169.254.32.202/30"
+}
+
+locals {
+  ali_gbl_apipa1 = cidrhost(var.apipa1,1)
+  ali_gbl_apipa2 = cidrhost(var.apipa2,1)
+  ali_cn_apipa1 = cidrhost(var.apipa1,2)
+  ali_cn_apipa2 = cidrhost(var.apipa2,2)
+ }

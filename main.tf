@@ -16,7 +16,6 @@ module "mc-transit-ali" {
   allocate_new_eip    = true
   az_support          = false
   #enable_advertise_transit_cidr = "true"
-  tags = var.tags
 }
 
 
@@ -37,7 +36,7 @@ module "mc-transit" {
   gw_name             = var.az_txgateway_name
   ha_gw               = var.az_txha_gw
   #enable_advertise_transit_cidr = "true"
-  # tags = var.tags                        # Not supported in ALI
+   tags = var.tags                        # Not supported in ALI
 }
 
 
@@ -101,3 +100,5 @@ module "azure-linux-vm-spoke58" {
 output "spoke58-vm" {
   value = module.azure-linux-vm-spoke58
 }
+
+
