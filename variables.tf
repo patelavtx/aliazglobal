@@ -99,15 +99,6 @@ variable "ali_global_asn" {
 
 
 
-locals {
-  peer_conn = "${var.ali_global_region}-${var.ali_cn_region}"
-}
-
-
-
-
-
-
 
 # Step2 AZ Global Transit
 variable "az_account" {
@@ -224,4 +215,7 @@ locals {
   ali_gbl_apipa2 = cidrhost(var.apipa2,1)
   ali_cn_apipa1 = cidrhost(var.apipa1,2)
   ali_cn_apipa2 = cidrhost(var.apipa2,2)
+  peer_conn = "${var.ali_global_region}-${var.ali_cn_region}"
  }
+
+ 

@@ -24,7 +24,7 @@ resource "aviatrix_transit_external_device_conn" "to_alicn" {
 }
 
 
-
+/*  
 # Setup  s2C ALI CN -> ALI GBL
 resource "aviatrix_transit_external_device_conn" "to_aliglobal" {
   #  vpcid and transit gateway variable values can be found via the transit gateway output
@@ -47,5 +47,5 @@ resource "aviatrix_transit_external_device_conn" "to_aliglobal" {
   remote_tunnel_cidr         = "${local.ali_gbl_apipa1}/30, ${local.ali_gbl_apipa2}/30"
   local_tunnel_cidr        = "${local.ali_cn_apipa1}/30, ${local.ali_cn_apipa2}/30"
 }
-
+*/
 
