@@ -75,7 +75,7 @@ output "alicn_route_table_ids" {
 
 resource "alicloud_route_entry" "toaliglobal" {
   provider = alicloud.china
-  route_table_id        = "${data.alicloud_route_tables.alicn.tables[1].route_table_id}"
+  route_table_id        = "${data.alicloud_route_tables.alicn.tables[0].route_table_id}"
   destination_cidrblock = var.ali_global_cidr
   nexthop_type          = "VpcPeer"
   nexthop_id            = "${alicloud_vpc_peer_connection.default.id}"
