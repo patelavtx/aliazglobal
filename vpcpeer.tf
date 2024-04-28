@@ -4,11 +4,23 @@ data "alicloud_account" "accepting" {
   provider = alicloud.china
 }
 
+/*
 # acceptor vpc details
 resource "alicloud_vpc" "accepting_vpc" {
   provider   = alicloud.china
   vpc_name   = var.ali_cn_vpcname
   cidr_block = var.ali_cn_cidr
+}
+*/
+
+data "alicloud_vpcs" "vpcs_cn" {
+  cidr_block = "10.4.28.0/23"
+  status     = "Available"
+  name_regex = "^alitransit4"
+}
+
+output "first_vpc_id" {
+  value = "${data.alicloud_vpcs.vpcs_cn.vpcs.0.id}"
 }
 
 # vpc conns
@@ -18,7 +30,7 @@ resource "alicloud_vpc_peer_connection" "default" {
   vpc_id               = module.mc-transit-ali.vpc.vpc_id
   accepting_ali_uid    = data.alicloud_account.accepting.id
   accepting_region_id  = var.alisyntax_cn_region       #  ali syntax, avtx prepends 'acs'
-  accepting_vpc_id     = alicloud_vpc.accepting_vpc.id
+  accepting_vpc_id     = data.alicloud_vpcs.vpcs_ds.id
   description          = local.peer_conn
 }
 
@@ -68,7 +80,7 @@ resource "alicloud_route_entry" "alicn" {
 data "alicloud_route_tables" "alicn" {
   provider = alicloud.china
   #vpc_id = "vpc-gw8mf0dq13lehyzmvx8zf"
-  vpc_id = "vpc-bp1avlwnc03vycc428guu"
+  vpc_id = data.alicloud_vpcs.vpcs_cn.id
 }
 
 output "alicn_route_table_tables" {
