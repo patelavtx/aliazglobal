@@ -55,7 +55,7 @@ resource "alicloud_route_entry" "toaliglobal" {
 
 
 resource "alicloud_route_entry" "alicn" {
-  provider = alicloud.global                                 # needed alias ; without didn't find RT
+  provider = alicloud.global                                 # needed provider ; without didn't find RT
   route_table_id        =  "${data.alicloud_route_tables.aliglobal.tables[0].route_table_id}"
   destination_cidrblock = var.ali_cn_cidr
   nexthop_type          = "VpcPeer"
