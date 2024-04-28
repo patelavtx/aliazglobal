@@ -63,6 +63,21 @@ resource "alicloud_route_entry" "alicn" {
 }
 
 
+# ACCEPTOR
+#  get acceptor vpc route table id
+data "alicloud_route_tables" "alicn" {
+  provider = alicloud.china
+  #vpc_id = "vpc-gw8mf0dq13lehyzmvx8zf"
+  vpc_id = "vpc-bp1avlwnc03vycc428guu"
+}
+
+output "alicn_route_table_tables" {
+  value = "${data.alicloud_route_tables.alicn.tables}"
+}
+
+output "alicn_route_table_ids" {
+  value = "${data.alicloud_route_tables.alicn.ids}"
+}
 
 
 
