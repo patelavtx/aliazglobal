@@ -30,7 +30,7 @@ resource "alicloud_vpc_peer_connection" "default" {
   vpc_id               = module.mc-transit-ali.vpc.vpc_id
   accepting_ali_uid    = data.alicloud_account.accepting.id
   accepting_region_id  = var.alisyntax_cn_region       #  ali syntax, avtx prepends 'acs'
-  accepting_vpc_id     = data.alicloud_vpcs.vpcs_ds.id
+  accepting_vpc_id     = data.alicloud_vpcs.vpcs_cn.id
   description          = local.peer_conn
 }
 
