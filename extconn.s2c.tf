@@ -31,7 +31,7 @@ resource "aviatrix_transit_external_device_conn" "to_alicn" {
 }
 */
 
-
+/*
 # Opt2 - Test with remote gateway configured
 #Note/.  Issue with accessing vpc peering on ALI, need to chase G.Lam.
 resource "aviatrix_transit_external_device_conn" "to_alicn" {
@@ -55,10 +55,10 @@ resource "aviatrix_transit_external_device_conn" "to_alicn" {
   #backup_local_tunnel_cidr  = "169.254.21.205/30, 169.254.22.205/30"
   #backup_remote_tunnel_cidr = "169.254.21.206/30, 169.254.22.206/30"
 }
+*/
 
 
 
-/*
 # Opt3a - Test with vpc peering using private ips
 resource "aviatrix_transit_external_device_conn" "to_alicn" {
   vpc_id                    = module.mc-transit-ali.vpc.vpc_id
@@ -74,7 +74,8 @@ resource "aviatrix_transit_external_device_conn" "to_alicn" {
   enable_ikev2              = "false"
    local_tunnel_cidr         = "${local.ali_gbl_apipa1}/30, ${local.ali_gbl_apipa2}/30"
   remote_tunnel_cidr        = "${local.ali_cn_apipa1}/30, ${local.ali_cn_apipa2}/30"
+  depends_on = [ alicloud_vpc_peer_connection.default ]
 }
-*/
+
 
 
