@@ -15,7 +15,7 @@ resource "aviatrix_transit_external_device_conn" "toazcn" {
   remote_gateway_ip         = "139.219.235.33"
   #phase1_local_identifier    = "public_ip"
   pre_shared_key            = "Aviatrix123#"
-  enable_ikev2              = "false"
+  enable_ikev2              = "false"eval
   local_tunnel_cidr         = "169.254.31.201/30, 169.254.32.201/30"
   remote_tunnel_cidr        = "169.254.31.202/30, 169.254.32.202/30"
   #ha_enabled                = "true"
